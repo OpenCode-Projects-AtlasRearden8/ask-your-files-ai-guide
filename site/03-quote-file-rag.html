@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 3 — Build a Tiny Quote-File RAG · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html" class="current">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-3-build-a-tiny-quote-file-rag">Chapter 3 — Build a Tiny Quote-File RAG</h1>
+<p>"RAG" — retrieval-augmented generation — sounds enterprise. The idea is actually small: before asking an AI to answer, <em>fetch the few quotes from your files that answer the question</em>, and paste just those into the prompt. It's the Chapter 1 rule on autopilot: bring the page, not the library.</p>
+<p>In this chapter you'll use the tool that ships with this guide, <code>tools/quote_rag.py</code>, and understand every moving part as we go.</p>
+<h2 id="the-idea-in-one-breath">The idea in one breath</h2>
+<p>Your documents get chopped into <strong>quotes</strong> — paragraph-sized pieces, each one small enough to quote honestly and short enough for a prompt. Each quote gets scored against your question for relevance, top-scoring quotes get shown, and (optionally) get copied into a local model's prompt so it drafts an answer <em>with the quotes visibly in front of it</em>.</p>
+<p>Because each step is a script you can read, there's no magic: if the answer is wrong, you can see <em>which quote won</em> and <em>why</em>.</p>
+<h2 id="step-0-check-what-you-have">Step 0: Check what you have</h2>
+<p>Everything works with plain Python — no internet, no accounts, no packages. If you have <a href="https://ollama.com">Ollama</a> installed and running, the tool also uses local <strong>embeddings</strong> (see below) and lets a local model draft full answers. Check either way:</p>
+<pre><code class="language-bash">python3 --version   # need 3.9+
+ollama list          # optional; errors here are completely fine</code></pre>
+<h2 id="step-1-build-the-quote-file">Step 1: Build the quote file</h2>
+<p>A <em>quote file</em> is just a JSON index of your pile — pieces of text from your documents plus metadata. Build one from any folder of <code>.txt</code> and <code>.md</code> files:</p>
+<pre><code class="language-bash">python3 tools/quote_rag.py build ./sample-docs --store quotes.json</code></pre>
+<p>You'll see a line like:</p>
+<pre><code class="language-text">Indexed 18 quotes from 5 file(s) (tfidf) -&gt; quotes.json [0.00s]</code></pre>
+<p>Peek inside with any text editor and you'll see the structure:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 1,
+  &quot;source&quot;: &quot;sample-docs&quot;,
+  &quot;embedding&quot;: &quot;tfidf&quot;,
+  &quot;idf&quot;: { &quot;co&quot;: 3.25, &quot;denied&quot;: 3.25, &quot;...&quot;: &quot;...&quot; },
+  &quot;quotes&quot;: [
+    { &quot;file&quot;: &quot;claim-reference.txt&quot;,
+      &quot;text&quot;: &quot;This claim was denied under code CO-97: ...&quot;,
+      &quot;head&quot;: &quot;Why you were denied&quot;,
+      &quot;tf&quot;: { &quot;co&quot;: 3.25, &quot;97&quot;: 3.25 } }
+  ]
+}</code></pre>
+<p>What's happening under the hood (worth knowing, worth being able to explain):</p>
+<ul><li><strong>Chunking.</strong> Files are split at blank lines into paragraph-sized pieces. Every piece keeps a pointer to its source file — that's how "where did this come from?" stays answerable.</li><li><strong>Marked quotes.</strong> A paragraph starting with `<code> &gt; </code><code> (or a </code>## heading`) records its heading as <code>head</code>, so titles can help ranking later.</li><li><strong>JSON, not a database.</strong> A human-openable index you can edit, back up, and diff. When it works, you trust it; when it doesn't, you can see it.</li></ul>
+<h2 id="step-2-ask">Step 2: Ask</h2>
+<pre><code class="language-bash">python3 tools/quote_rag.py ask quotes.json &quot;Why was the claim denied?&quot;</code></pre>
+<p>And get back the most relevant quotes, scored:</p>
+<pre><code class="language-text">Top quotes for: &#x27;Why was the claim denied?&#x27;  (searched in 0 ms)
+
+[0.33] claim-reference.txt — Why you were denied:
+  This claim was denied under code CO-97: &quot;the service billed is covered,
+  but the modifier it was billed with is inconsistent with the service.&quot;
+
+[0.15] claim-reference.txt:
+  Sample claim reference letter — fictional, for testing the guide&#x27;s
+  tools.
+
+[0.10] february-letter.txt — What happened:
+  Today we received your claim for the same-day clinic visit on February
+  9. We have paid the preventive portion and applied the visit to your
+  deductible.</code></pre>
+<p>Each score is a similarity. Notice how much accountability this buys: every claim in the final answer now has a <em>visible, checkable source quote</em> — a huge upgrade over big pastes, where documents blur together.</p>
+<h2 id="step-3-the-optional-ollama-upgrade">Step 3: The optional Ollama upgrade</h2>
+<p>If you ran <code>ollama pull nomic-embed-text</code> (a small local embedding model), the tool can switch from the built-in TF-IDF scorer to real embeddings:</p>
+<pre><code class="language-bash"># once, one download
+ollama pull nomic-embed-text
+
+# rebuild the index (it will notice the model is available)
+python3 tools/quote_rag.py build ./sample-docs --store quotes.json --embed nomic-embed-text
+
+# rankings improve for meaning, not just word overlap:
+python3 tools/quote_rag.py ask quotes.json &quot;Can I fight this decision?&quot;</code></pre>
+<p><strong>What changed.</strong> TF-IDF matches words ("appeal" vs "fight" score differently). Embeddings map meaning: <em>fight this decision</em> lands near <em>appeal</em> even though they share no words — before the upgrade, TF-IDF politely reports "No quotes matched" for that question, which is exactly the honest gap this fills. For a few hundred quotes, TF-IDF is usually fine and always instant; for a few thousand, embeddings earn their keep. Best habit: rebuild with <code>--embed</code> where you have it, keep <code>--store</code> files buildable on any machine.</p>
+<p>And now the full RAG — answer, not research — using a local chat model:</p>
+<pre><code class="language-bash">ollama pull llama3.2
+python3 tools/quote_rag.py ask quotes.json &quot;Can I fight this decision?&quot; --answer --model llama3.2</code></pre>
+<p>The tool asks the local model with a prompt like:</p>
+<pre><code class="language-text">Answer ONLY using the quotes below. If they don&#x27;t contain the answer, say
+exactly: &quot;The quotes don&#x27;t contain that.&quot;
+
+Question: Can I fight this decision?
+
+Quote from march-letter.txt (Section: Appeals):
+You may appeal within 180 days of the denial date.</code></pre>
+<p><code>--answer</code> never skips the quote step, and never fetches from the network. It's the same quotes, plus a local model asked to write the paragraph for you.</p>
+<h2 id="read-the-tools-limits-out-loud">Read the tool's limits out loud</h2>
+<ul><li><strong>It only sees <code>.txt</code> and <code>.md</code> files.</strong> For PDFs, first do a text export; Chapter 7 folds that step into the workflow.</li><li><strong>Whole-file keywords beat subtle meaning</strong>, sometimes. Try <code>--top 20</code> and skim more quotes; a small tool is meant to be reread.</li><li><strong>Long files in one paragraph drench it.</strong> Chunking is the guess about paragraph size; if a paragraph is a full page, split it manually.</li></ul>
+<h2 id="why-this-is-worth-building-yourself">Why this is worth building yourself</h2>
+<p>Every piece is small and open: chunks, scores, JSON. When the tool is yours, you learn the actual shape of <em>retrieval</em> — which is the one skill every RAG system (including giant enterprise ones) shares. And it's a pattern you keep: the same quote-file idea will power the <strong>chat-export-archiver-cli</strong> companion tool, where your archived chats become a searchable quote file of their own.</p>
+<h2 id="in-one-sentence">In one sentence</h2>
+<blockquote><p>Chop your files into quotes, score them against your question, paste only the winners — the paste stays small because a script chose it.</p></blockquote>
+<p><strong>Next:</strong> <a href="04-folder-packing.html">Chapter 4 — Folder packing</a>: when the question really does need the <em>whole pile</em> at once — and a way to do that safely too.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

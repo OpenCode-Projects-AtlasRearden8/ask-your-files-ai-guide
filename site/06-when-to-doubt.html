@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 6 — When Answers Deserve Doubt · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html" class="current">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-6-when-answers-deserve-doubt">Chapter 6 — When Answers Deserve Doubt</h1>
+<p>Every prompting guide tells you to trust but verify; almost none tells you how to <em>actually</em> verify. This chapter does. Here's the honest frame first: a model predicts likely-sounding text, which is usually what you want and occasionally exactly what you don't. Your job isn't to be paranoid, or credulous, but to develop a librarian's reflex — a split-second reader's hesitation about anything from context (or retrieval).</p>
+<h2 id="the-four-signs-an-answer-was-written-from-memory-not-from-your-quotes">The four signs an answer was written from memory, not from your quotes</h2>
+<ol><li><strong>No source path.</strong> Your documents were all indexed with file names (Chapters 2–4). An answer about "your files" that cites none is written from the model's general knowledge, or from a feel of your pile's <em>shape</em> — not your pile.</li><li><strong>Perfectly polished numbers.</strong> Real-world documents are ragged: dates that don't align, amounts with typos, thought-fragments. A suspiciously smooth amount or timeline that your actual files contradict is a red flag.</li><li><strong>Unfamiliar phrasing.</strong> Your insurance letters say "explanation of benefits." History says "EOB." If the answer scrambles these into something you've never seen in your pile, ask where that language came from.</li><li><strong>Too-complete story.</strong> Your life's documents have gaps. When an answer offers total, gap-free coverage — every date sorted, every vignette seamless — that's the "decorating" habit from Chapter 1, not your literal paper trail.</li></ol>
+<h2 id="quick-verification-moves">Quick verification moves</h2>
+<ul><li><strong>Ask for the source file.</strong> "Which document is that from?" is free. Then (this part matters) <em>actually open the file</em> and check it. The AI's job is discovery; yours is the last read.</li><li><strong>Search the word it introduced.</strong> Ctrl+F the exact term in your top-level ledger, or grep the whole pile. Not there? Dead giveaway.</li><li><strong>Ask again smaller.</strong> Ask your follow-up in a fresh chat with the single relevant paragraph pasted. If the small-chat answer contradicts the big-answer, go with the small one.</li><li><strong>Ask it to argue the negative.</strong> "What in my file pile <em>contradicts</em> this?" An answer that can't find counterbalance in your own record is often just so.</li></ul>
+<h2 id="the-stakes-map-where-doubt-matters-more">The stakes map — where doubt matters more</h2>
+<p>Not all questions weigh the same. A map of stakes:</p>
+<table><thead><tr><th>Stakes</th><th>Example</th><th>Doubt level</th></tr></thead><tbody><tr><td>Fun work (drafting, summarizing, finding)</td><td>"Find that chapter five quote"</td><td>Quote check, and done</td></tr><tr><td>Money moves (billing, refunds, filing)</td><td>"How much do I owe for Feb?"</td><td>Open the document; verify</td></tr><tr><td>Legal or government</td><td>"Does this notice need a reply by Friday?"</td><td>Verify — then a pro</td></tr><tr><td>Health, yours or others'</td><td>"Why did my visiting hours change between these treatments?"</td><td>Verify documents for <em>what was written</em> — never for <em>what to do medically</em></td></tr></tbody></table>
+<p>Read that last row carefully, because it's the caution worth tattooing: an AI can be excellent at telling you <strong>what your documents say</strong> and have no right to say <strong>what to do about them.</strong> "My bill says X" is a document skill — fair game. "Therefore don't get Y treatment" is medical advice; wherever that line lives for you, keep it well left of a chat window.</p>
+<p>This applies to the tools, too: the quote-file tool from Chapter 3 is a <em>finding</em> device. It surfaces quotes; it never links them to what you should do. That division of labor is exactly the design doing its job.</p>
+<h2 id="grayscale-what-doubt-is">Grayscale: what "doubt" is</h2>
+<p>It's worth saying what healthy doubt is <em>not</em>: a thrown-hands "AI lies!" Nothing here means AI answers will be wrong. Most are right, and verified ones are right so often it's disorienting. The healthy stance isn't "don't believe it," but "don't believe it <em>unverified</em>." You'd do that with a friend's memory of a bill ("did I pay that? — check"), and the AI deserves (and gets better from) the same generosity.</p>
+<h2 id="when-to-stop-asking-the-ai">When to stop asking the AI</h2>
+<p>Old question, still true: when the next step stops being "find what my files say" and starts being "decide what to do," that's the moment to carry your quotes to a human professional — a doctor, a lawyer, your cooperative extension, your accountant — and this guide's techniques have earned nothing but applause for getting you there faster, with the specific, sourced, already-found documents in your hand.</p>
+<h2 id="in-one-sentence">In one sentence</h2>
+<blockquote><p>Ask what your documents say, verify the quote it came from, and never outsource a decision that needs a professional's license or your real judgment.</p></blockquote>
+<p><strong>Next:</strong> <a href="07-first-project.html">Chapter 7 — Your first project</a>: exactly the weekend recipe, end to end.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

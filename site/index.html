@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Ask Your Files AI Guide · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html" class="current">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="ask-your-files-ai-guide">Ask Your Files AI Guide</h1>
+<p><em>A manual for asking AI questions about your own documents — fully local, fully yours.</em></p>
+<h2 id="who-this-is-for">Who this is for</h2>
+<p>You have a pile of documents. Medical bills and insurance letters. A book manuscript in progress. Buyer notes from eBay. Meeting notes from work. A shoebox of scanned paperwork. And you have an AI assistant — whatever kind, however you run it — and a feeling that it could help you <em>ask better questions</em> about all those files. You're right. It can.</p>
+<p>This guide shows you how, one small honest step at a time.</p>
+<h2 id="what-youll-learn">What you'll learn</h2>
+<ul><li><strong>Why pasting fails at scale</strong> (<a href="01-why-pasting-fails.html">Chapter 1</a>) — and why you shouldn't feel bad about it. Everyone hits this wall.</li><li><strong>Simple retrieval ideas</strong> (<a href="02-simple-retrieval.html">Chapter 2</a>) — plain search, tagging, and outlines: the underrated 80% wins.</li><li><strong>A tiny quote-file RAG</strong> (<a href="03-quote-file-rag.html">Chapter 3</a>) — a working tool you build step by step, powered by <a href="https://ollama.com">Ollama</a> on your own machine (with a fully-offline fallback built in).</li><li><strong>The folder-packing approach</strong> (<a href="04-folder-packing.html">Chapter 4</a>) — one prompt that carries your whole folder.</li><li><strong>Privacy rules</strong> (<a href="05-privacy-rules.html">Chapter 5</a>) — how to keep personal files personal.</li><li><strong>When answers deserve doubt</strong> (<a href="06-when-to-doubt.html">Chapter 6</a>) — the healthiest skill in this whole manual.</li><li><strong>A guided first project</strong> (<a href="07-first-project.html">Chapter 7</a>) — from empty folder to first real answer, in one sitting.</li><li><strong>A session checklist</strong> (<a href="08-checklist.html">Chapter 8</a>) — a pocket version of everything important.</li><li><strong>A glossary</strong> (<a href="09-glossary.html">Chapter 9</a>) — every term in this book, explained like a friend would.</li></ul>
+<h2 id="how-to-read-it">How to read it</h2>
+<ul><li>If you're brand new, read Chapters 1 and 2 first. They change how you think, and they require zero tools.</li><li>If you want to <em>do</em> something today, go straight to Chapter 7 (the first project); it will send you back to earlier chapters exactly when you need them.</li><li>Every chapter ends with <strong>In one sentence</strong> — a plain-English takeaway you can hold in your head all day.</li></ul>
+<h2 id="a-promise-about-scope">A promise about scope</h2>
+<p>Nothing in this guide is medical, legal, or financial advice. When we use examples like insurance letters and medical bills, we're teaching <em>document skills</em>, not professional judgment. Chapter 6 says more about where an AI helper's confidence is earned and where it isn't.</p>
+<h2 id="one-line-per-chapter-big-picture">One line per chapter, big picture</h2>
+<blockquote><p><strong>Don't paste the library. Bring the page.</strong></p></blockquote>
+<p>Everything after this sentence is just careful ways of doing that.</p>
+<p><em>Companion tools mentioned in this guide:</em> <strong>folder-to-prompt-cli</strong> (Chapter 4) and <strong>chat-export-archiver-cli</strong> (turning your old chat exports into a searchable archive). This site was built from Markdown with a simple local build script — <code>python3 tools/build_site.py</code> — so you can rebuild the whole book yourself.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

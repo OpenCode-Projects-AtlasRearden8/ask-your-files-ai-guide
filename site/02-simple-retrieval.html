@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 2 — Simple Retrieval: Search, Tagging, Outlines · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html" class="current">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-2-simple-retrieval-search-tagging-outlines">Chapter 2 — Simple Retrieval: Search, Tagging, Outlines</h1>
+<p>Nothing in this chapter requires installing anything. If you can use the search box in your file manager, you can do everything on this page. These three habits — plain search, tagging, and outlines — are genuinely undervalued: for most personal-document questions, they solve the whole problem, and even when they don't, they make every later chapter work better.</p>
+<h2 id="idea-1-plain-search-done-well">Idea 1: Plain search, done well</h2>
+<p>Your operating system already ships a full-text search engine (macOS Spotlight or Finder search, Windows Explorer search, Linux desktop search). The trick is using it like a professional, not like a new roommate looking for keys.</p>
+<p><strong>Search by quote, not by topic.</strong> Instead of asking "insurance," search a phrase only that letter could contain: <code>"panel year 2026"</code> or <code>"denial code CO-97"</code>. Unique word combos beat single common words every time.</p>
+<p><strong>Search inside, not just among.</strong> Make sure the tool indexes <em>file contents</em>, not just filenames. On Windows, Explorer's "File contents" option; on macOS, Finder's <code>⌘F</code> then "find by Content". If your PDFs aren't found, it's because scans have no text layer — that's an OCR problem, and the fix plan is in Chapter 7.</p>
+<p><strong>Narrow by name pattern.</strong> <code>2024-02*</code> finds everything from one month. <code>letter*contract*</code> beats sorting through screenshots and selfies.</p>
+<p><strong>Save the query.</strong> If you'll ask it monthly (bills, quarterly taxes), save the search or keep a <code>searches.txt</code> file with your favorite query syntax.</p>
+<h2 id="idea-2-tags-and-a-plain-ledger-file">Idea 2: Tags and a plain "ledger" file</h2>
+<p>Tags are just words you commit to writing on documents, in filenames or inside a small index file. Start with a <strong>ledger</strong> — a single <code>INDEX.md</code> (or <code>INDEX.txt</code>) file at the top of your document folder. One line per document:</p>
+<pre><code class="language-text">2024-02-14 | insurance-letter.pdf | claim denial | tags: CO-97, same-day-clinic, appeal
+2024-03-01 | refund-email.txt     | seller reply | tags: ebay, return-window</code></pre>
+<p>Three columns, or fewer — a date, the filename, and free-form words. You've just created a file that's trivially searchable <em>and</em> perfectly useful as AI fodder, because it's a hand-made index of your pile. When a folder has an <code>INDEX.md</code>, both Chapter 3's quote file and Chapter 4's folder packing immediately get smarter: the AI sees your own labels.</p>
+<p>Rules that make a ledger survive real life:</p>
+<ul><li><strong>One line per file, always.</strong> No multi-line rows. Lines are cheap to add.</li><li><strong>Date first, ISO format</strong> (<code>YYYY-MM-DD</code>), so sorting shows history.</li><li><strong>Tags lowercase</strong> and short; you'll type them again tomorrow.</li><li><strong>Never delete a line</strong> — if a file's old, mark it <code>archived</code> in tags.</li></ul>
+<h2 id="idea-3-topical-outlines">Idea 3: Topical outlines</h2>
+<p>When you know <em>what to look at</em> but not <em>where</em>, an outline is a map of your pile you make once and reuse forever. Take your doc set, and write (or let an AI help you draft from filenames only — never paste content!) one page:</p>
+<pre><code class="language-text">OUTLINE.md — What&#x27;s in my paper pile
+1. Billing and insurance
+   1.1 Explanation-of-benefit letters 2024 (5 files, folder /insurance/eob-2024)
+   1.2 The CO-97 denial story: what happened, letters, deadlines
+2. The book manuscript (folder /manuscript)
+   2.1 Chapters done: 1–4. Chapter 5 needs scene in revision.
+3. eBay inventory and returns
+   3.1 Listing templates. 3.2 Return-window rules I care about.</code></pre>
+<p>An outline earns rent three times:</p>
+<ol><li><strong>It answers questions itself.</strong> "What did chapter five say again?" is answered by a glance, not a search.</li><li><strong>It seeds your tags</strong> — everything in the outline becomes a tag word.</li><li><strong>It's the perfect cover letter for the AI</strong> — paste the outline at the top of any session, and now the model knows your pile's shape so it can ask you for specifics instead of guessing.</li></ol>
+<h2 id="the-cheap-pipeline-assembled">The cheap pipeline, assembled</h2>
+<p>Your document reflex after this chapter, before reaching for the AI at all:</p>
+<ol><li>Open search. Try two unique-phrase queries.</li><li>If it works, done — skim the found quotes.</li><li>If not, open <code>INDEX.md</code>, check what the pile itself knows.</li><li>Still fuzzy? Add a line to the outline, then continue.</li></ol>
+<p>Notice: the AI hasn't been involved yet. That's the point. Search is instant, free, and private. Chapter 3 walks you into the next rung — when search isn't enough and the pile is too foggy — with a real, working, offline tool you can build in twenty minutes.</p>
+<h2 id="in-one-sentence">In one sentence</h2>
+<blockquote><p>Search for phrases, tag with a one-file ledger, keep an outline — and you'll often never need to paste anything at all.</p></blockquote>
+<p><strong>Next:</strong> <a href="03-quote-file-rag.html">Chapter 3 — The quote-file RAG</a>, where you build a little search index that <em>you own</em>, run by a script that never leaves your computer unless you tell it to.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

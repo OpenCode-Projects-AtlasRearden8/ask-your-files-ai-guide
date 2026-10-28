@@ -1,0 +1,16 @@
+Sample claim reference letter — fictional, for testing the guide's tools.
+
+## Coverage summary
+
+Your plan year runs February 1 through January 31. The same-day clinic visit
+billed on February 11, 2024 is an in-network service under your panel year
+2026 agreement. Preventive services are covered at 100 percent, and
+diagnostic services carry a 60-dollar copay after the deductible.
+
+## Why you were denied
+
+This claim was denied under code CO-97: "the service billed is covered, but
+the modifier it was billed with is inconsistent with the service."
+
+Nothing is owed by you for this line. The billing office needs to resubmit
+with a corrected modifier.

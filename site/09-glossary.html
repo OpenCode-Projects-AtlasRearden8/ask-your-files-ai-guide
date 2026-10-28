@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 9 — Glossary · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html" class="current">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-9-glossary">Chapter 9 — Glossary</h1>
+<p>Every term used in this manual, explained like a friend would — casually, accurately, and in one or two sentences each.</p>
+<p><strong>Chunk</strong> — A piece of a document, sized to be quotable. In this guide, chapters of your pile get chopped into paragraph-sized pieces, and each piece is one "chunk." Chunking is where a RAG system's quality starts: wrong-sized chunks mean ambiguous quotes.</p>
+<p><strong>Context window</strong> — An AI model's working desk. Everything the model can see for one reply — your prompt, pasted documents, the conversation so far — must fit in this memory. Pasting your whole library eventually can't fit, which by Chapter 1 is why we retrieve.</p>
+<p><strong>Embedding</strong> — A way of turning text into a list of numbers such that similar-meaning texts land near each other. The local model <code>nomic-embed-text</code> (Chapter 3, with Ollama) makes these embeddings on your machine; scoring a question against quotes becomes a fast similarity comparison.</p>
+<p><strong>Folder packing</strong> — Bundling a folder's files into one prompt, each file separated by a header (Chapter 4). Great for cross-file questions over small piles; skip it when the pile is big — that's a quote-file problem.</p>
+<p><strong>Hallucination</strong> — When an AI states something that isn't true or isn't in your documents, in fluent confident prose. Not lying exactly — more decorating (Chapter 1). The cure you own: quotes, visible sources, verification (Chapter 6).</p>
+<p><strong>Index (document index)</strong> — A helper file that says what your pile contains. <code>INDEX.md</code> is your hand-made one (Chapter 2); <code>quotes.json</code> is the tool-built one (Chapter 3) — a list of chunks with their source files.</p>
+<p><strong>JSON</strong> — A plain-text structured data format, openable in any editor. Your quote file is JSON on purpose: no database to trust, no binary to damage, easy to back up, diff, and delete.</p>
+<p><strong>Ledger</strong> — This guide's nickname for the one-file-per-folder index (<code>INDEX.md</code> from Chapter 2: date, filename, subject, tags — one line each).</p>
+<p><strong>Local-first</strong> — Designing so everything runs on your computer: no uploads, no accounts, no retention settings to trust, no data leaving your machine except when you deliberately paste (Chapter 5's Rule 1).</p>
+<p><strong>Lost-in-the-middle</strong> — A documented behavior where models pay less attention to the middle of very long inputs. Important only because it's invisible: pastes can silently miss detail while sounding confident.</p>
+<p><strong>Ollama</strong> — Free software that runs open AI models on your own computer, locally. In this guide it optionally provides embeddings (<code>nomic-embed-text</code>) and local answering (<code>llama3.2</code>) for the quote-file tool.</p>
+<p><strong>Quote file</strong> — The JSON index this guide builds. Pulls the quotable chunks of your files — hence the file's function: a searchable shelf of quotable pieces.</p>
+<p><strong>RAG (retrieval-augmented generation)</strong> — Ask-anything pattern: <em>retrieve</em> the small relevant pieces of your documents first, then <em>generate</em> an answer with those pieces visibly in the prompt. This entire guide is one friendly version of it.</p>
+<p><strong>Redaction</strong> — Replacing private details (names, numbers, addresses) with placeholders before pasting. Habit, not event — keep placeholder text handy (Chapter 5).</p>
+<p><strong>Retrieval</strong> — Finding the right piece of your pile for a question, before any generation happens. Chapter 2's search, Chapter 3's quote file, and Chapter 4's packing are all retrieval methods at different rungs of effort.</p>
+<p><strong>Scoring</strong> — Giving each quote a number for "how relevant to this question?" With TF-IDF it's word overlap math; with embeddings it's meaning-space distance; with your eyes it's <code>--top 20</code> and a skim.</p>
+<p><strong>Source path</strong> — The file a quote came from (<code>docs/eob-2024-02-11.txt</code>). The core safety feature of the whole pipeline: every answer should be traceable to one. Chapter 6's first verification move is <em>always</em> "which file?"</p>
+<p><strong>TF-IDF</strong> — The classic word-overlap scoring method built into the quote-file tool as its offline default: terms counted per quote scaled by how rare they are across your pile ("CO-97" beats "claim"). No model, no download, works anywhere Python runs.</p>
+<p><strong>Tag</strong> — A short word you deliberately associate with files (shown in your ledger as <code>tags: ...</code> in Chapter 2). Cheap and hand-made; they make search specific and give the chapter-3 index the vocabulary of your pile.</p>
+<p><strong>Token</strong> — The units models read and write, roughly word-chunks. Context windows are measured in thousands of tokens; your pastes are too. Why pasting fails at scale is simply that tokens in documents outnumber tokens on the desk.</p>
+<p><strong>Topical outline</strong> — A bulleted map of your pile's themes (<code>OUTLINE.md</code> in Chapter 2). Answers questions by itself, seeds your tags, and doubles as the cover sheet pasted at the top of any AI session.</p>
+<p><strong>Verification (closing the loop)</strong> — The one claim, one source-file, one real read (Chapter 6). The habit that turns an AI from a plausible-sounding stranger into a useful research assistant.</p>
+<p>That's the whole book. If you made it here having run your first quote-file ask and checked one source quote, you have the skill this manual exists to teach. Everything else is practice — and <a href="07-first-project.html">Chapter 7</a> will be waiting the next time a new folder shows up in your life.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

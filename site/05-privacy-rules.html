@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 5 — Privacy Rules for Personal Files · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html" class="current">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-5-privacy-rules-for-personal-files">Chapter 5 — Privacy Rules for Personal Files</h1>
+<p>You're going to paste some of your own documents into AI conversations. Good documents to paste: contracts, manuals, manuscripts, meeting notes, letters that have already been through an appeals process. Documents to keep away: anything you'd be uncomfortable finding, quoted, in someone else's hands.</p>
+<p>The principles in this chapter are short, and they're the whole policy:</p>
+<blockquote><p><strong>Rule 1 — Local first.</strong> If the tool can run on your computer, run it there. Every tool in this guide does. A local model can't leak what it never sees.</p></blockquote>
+<blockquote><p><strong>Rule 2 — Minimum sufficient data.</strong> Paste the smallest set that can answer the question. Ask "which paragraph do I need?" before "should I paste the file?" — often it's one paragraph, and Chapter 2's search finds it.</p></blockquote>
+<blockquote><p><strong>Rule 3 — Redact by default.</strong> Names, account numbers, member IDs, dates of birth, full addresses, phone numbers: replace with placeholders before pasting. <code>Policy #REDACTED-01</code>, <code>my spouse</code>, <code>my primary clinic</code>. The AI answers your question just as well with placeholders 99% of the time.</p></blockquote>
+<blockquote><p><strong>Rule 4 — Never paste credentials or money.</strong> Passwords, API keys, full payment card numbers, bank logins, one-time codes. If a document contains one, redact the line. This rule is absolute; there's no "just this once."</p></blockquote>
+<blockquote><p><strong>Rule 5 — Understand the tool before the file.</strong> Cloud chat tools vary: some train on your messages, some promise otherwise, some have per-chat settings. When in doubt, redact more, or take the local route. Corporate accounts can have separate logging policies from personal ones — don't mix them.</p></blockquote>
+<h2 id="the-redaction-habit-made-concrete">The redaction habit, made concrete</h2>
+<p>Keep a tiny scratch file (or just your editor's find-and-replace) with placeholders you reuse, so redaction takes thirty seconds:</p>
+<table><thead><tr><th>Original</th><th>Placeholder</th></tr></thead><tbody><tr><td><code>John Asdale</code></td><td><code>I / the patient</code></td></tr><tr><td><code>Bill Henderson</code> (third party)</td><td><code>Person A</code></td></tr><tr><td><code>Account 4471-0092-33</code></td><td><code>Account ###-END-33</code></td></tr><tr><td><code>DOB 03/14/74</code></td><td><code>DOB [redacted]</code></td></tr><tr><td><code>123 Maple Street</code></td><td><code>my home address</code></td></tr></tbody></table>
+<p>Two tricks that make this sustainable:</p>
+<ul><li><strong>Keep the tail digits.</strong> You often need the <em>fact that</em> two documents share an account, not the number itself. <code>###-END-33</code> keeps the match, drops the ID.</li><li><strong>Redact the copy, never the original.</strong> Work from a local copy when a document will be pasted at all. The original files stay intact, exactly as filed.</li></ul>
+<h2 id="what-local-actually-buys-you">What "local" actually buys you</h2>
+<p>Local-first isn't only a privacy virtue; it <em>removes decisions</em>. When the model, the embeddings, and the index all live on your machine:</p>
+<ul><li>no upload step exists to get wrong,</li><li>no account, no terms-of-service gray area, no retention setting,</li><li>the index file (<code>quotes.json</code>) is just a file you can delete, like any other.</li></ul>
+<p>The trade-off is real: local models, especially small ones, are less polished than the big cloud models. For quote-reading and summarizing, they're usually plenty — and when they're not, Rule 2 (minimum data, redacted) is your cloud escape hatch, used deliberately.</p>
+<h2 id="personal-data-radar-the-60-second-version">Personal-data radar (the 60-second version)</h2>
+<p>Before any paste, scan for: names of other people, dates of birth, account or member numbers, street addresses, phone/email, anything medical-visit-shaped, anything third-party-named, anything you'd be sad to find screenshot in an unexpected place. If you see placeholders in your pasted text and the question still works — pause and confirm — you're in good shape. If the question only works with the private detail visible, that's a sign the question itself might be one for a professional, not a chat window (see Chapter 6).</p>
+<h2 id="a-note-on-scanned-documents-and-photos">A note on scanned documents and photos</h2>
+<p>Scans and photos of documents carry all the same personal data as the paper — and sometimes more (a photo of a bill on your desk may include handwritten notes, or fragments of other mail). Redact or crop <em>images</em> too, and remember that OCR tools (including the ones that would let you use Chapter 3 on a scan) may themselves be cloud services. Prefer local OCR (many local tools exist) when the pages are sensitive.</p>
+<h2 id="in-one-sentence">In one sentence</h2>
+<blockquote><p>Run it local, paste the least, redact by habit, and never let credentials or money across the line — pretty soon it's a reflex, not an effort.</p></blockquote>
+<p><strong>Next:</strong> <a href="06-when-to-doubt.html">Chapter 6 — When answers deserve doubt</a>: the judgment layer, protecting everything above.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

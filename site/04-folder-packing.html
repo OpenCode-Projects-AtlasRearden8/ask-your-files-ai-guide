@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 4 — The Folder-Packing Approach · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html" class="current">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-4-the-folder-packing-approach">Chapter 4 — The Folder-Packing Approach</h1>
+<p>Sometimes the honest answer is: you genuinely need the <em>whole folder</em> at once. A cross-document question — "bottlecap chapter appears in which of my drafts?" "which letters ever mention June 14th?" — can't be answered from one quote at a time. Folder packing is the technique: one script turns a folder into one prompt, everything dated, named, and compact.</p>
+<p>This chapter tells you when to pack, how to pack well, and how the companion tool <strong>folder-to-prompt-cli</strong> fits.</p>
+<h2 id="when-packing-is-the-right-call">When packing is the right call</h2>
+<p>Pack when the question spans files rather than living inside one:</p>
+<ul><li><strong>Inventories</strong> — "list every claim amount across all replies."</li><li><strong>Name-driven maps</strong> — "which files mention X?" (then Chapter 2 search. Packing finds fuzzy as well as exact matches.)</li><li><strong>Small piles that fit.</strong> If your folder has ~15 short files, packing and asking usually beats building an index.</li></ul>
+<p>Skip packing when the pile is long, is mostly boilerplate you'll never need, or contains anything too personal to paste (Chapter 5 — loud).</p>
+<h2 id="how-a-good-pack-looks">How a good pack looks</h2>
+<p>A good pack is a plain-text bundle, files separated by metadata headers so the model (and you, months later) can trace any line to its source:</p>
+<pre><code class="language-text">=== FILE: sample-docs/eob-2024-02-11.txt (11 Feb 2024, 412 chars) ===
+First paragraph of my explanation-of-benefits letter...
+Second paragraph...
+
+=== FILE: sample-docs/eob-2024-03-05.txt (5 Mar 2025, 380 chars) ===
+...</code></pre>
+<p>Why this style works better than <code>cat *.txt &gt; one.txt</code>:</p>
+<ul><li><strong>Clear fences.</strong> Models treat <code>=== FILE:</code> markers as boundaries, and the AI can mention files by name in its answer.</li><li><strong>Sizes visible.</strong> A 400-char file is skimmable; knowing size bounds the model's guess about what's worth opening.</li><li><strong>Dates resolve</strong> "which one was newest?" in one step.</li></ul>
+<h2 id="the-workflow-end-to-end">The workflow, end to end</h2>
+<p>Our guide ships with a <em>minimal</em> packer below you can type in ten minutes, and the companion tool <strong>folder-to-prompt-cli</strong> automates the polished version (extensions filtering, file-type detection, redaction lists, clipboard copy): one command, your whole folder in one prompt, ready to paste or file.</p>
+<pre><code class="language-bash"># with the companion tool installed:
+folder-to-prompt ./my-docs --out packed-prompt.txt --ask &quot;$(cat question.txt)&quot;</code></pre>
+<h2 id="a-minimal-packer-you-can-own">A minimal packer you can own</h2>
+<p>No companion tool? Here's the same idea in ~12 lines of Python you can put in your own <code>bin</code> folder, named <code>pack.py</code>:</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;pack.py — bundle a folder of .txt/.md files into one prompt.&quot;&quot;&quot;
+import sys, pathlib
+
+folder, out = pathlib.Path(sys.argv[1]), sys.argv[2]
+parts = []
+for f in sorted(p for p in folder.rglob(&quot;*&quot;) if p.suffix.lower() in {&quot;.txt&quot;, &quot;.md&quot;}):
+    text = f.read_text(encoding=&quot;utf-8&quot;, errors=&quot;replace&quot;).strip()
+    rel = f.relative_to(folder)
+    parts.append(f&quot;=== FILE: {rel} ({len(text)} chars) ===\n{text}\n&quot;)
+pathlib.Path(out).write_text(&quot;\n&quot;.join(parts), encoding=&quot;utf-8&quot;)
+print(f&quot;Packed {len(parts)} files -&gt; {out} &quot;
+      f&quot;({sum(len(p) for p in parts)} chars total)&quot;)</code></pre>
+<pre><code class="language-bash">python3 pack.py sample-docs packed-prompt.txt</code></pre>
+<p>Read what it does: it walks the folder, keeps only the extensions you care about, and writes one header per file. That's it — no network, no magic. Paste the output into your next chat as one message.</p>
+<h2 id="the-packers-guardrails-small-and-worth-keeping">The packer's guardrails (small, and worth keeping)</h2>
+<ol><li><strong>Exclude before you ever pack.</strong> Decide which folders are off-limits <em>first</em> — for most people: anything with <code>budget</code>, <code>ledger</code>, tax, or health records in the path. Your packer (and the companion tool's <code>--exclude</code> flag) should skip them by rule, not by memory.</li><li><strong>Keep a character budget.</strong> A pack that's too big silently reintroduces the Chapter 1 problems. If the whole bundle is over roughly 20–30k words, you don't have a packing problem — you have a quote-file problem, and Chapter 3 is your friend again.</li><li><strong>A copy stays in your folder.</strong> The pack is just another file. If you keep it (<code>packed-prompt.txt</code>), every question already has its file-visible source archive; save the <em>answer</em> next to it and you have hand-made provenance.</li></ol>
+<h2 id="where-chat-export-archiver-cli-fits">Where chat-export-archiver-cli fits</h2>
+<p>The same alias exists in reverse: your AI <strong>chats themselves</strong> are documents — the questions you asked and the answers you got. Saving them, trimming the noise, and accumulating them into one searchable archive turns your AI history into a first-class quote file (Chapter 3's format works great). That's exactly what the companion tool <strong>chat-export-archiver-cli</strong> does, tidily, offline. End of the loop: <em>your questions about your files become files you can ask about.</em></p>
+<h2 id="in-one-sentence">In one sentence</h2>
+<blockquote><p>When a question spans the whole pile, pack the pile into one honest, headered prompt — and keep packing as a conscious, deliberate move, not a habit.</p></blockquote>
+<p><strong>Next:</strong> <a href="05-privacy-rules.html">Chapter 5 — Privacy rules</a>: the rules to keep personally identifying or sensitive material off the pasteboard entirely.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>

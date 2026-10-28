@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ask Your Files AI Guide — a plain-English manual for asking AI questions about your own documents, fully local.">
+<title>Chapter 7 — Your First Project: From Empty Folder to First Answer · Ask Your Files AI Guide</title>
+<style>:root { --ink:#1c1917; --panel:#faf7f2; --accent:#b45309; --line:#e7e2da; }
+* { box-sizing: border-box; }
+body { margin:0; font:17px/1.65 Georgia,'Times New Roman',serif; color:var(--ink);
+  background:#fdfcfa; }
+header.site { background:#171412; color:#f5f1ea; padding:2rem 1rem 1.3rem;
+  text-align:center; }
+header.site h1 { font-size:1.35rem; margin:0; letter-spacing:.02em; }
+header.site p { margin:.35rem 0 0; color:#cfc5b8; font-size:.9rem;
+  font-family:system-ui,sans-serif; }
+nav.toc { max-width:18rem; float:right; margin:1.5rem 1rem; padding:1rem 1.2rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:.5rem;
+  font-family:system-ui,sans-serif; font-size:.88rem; position:sticky; top:1rem; }
+nav.toc b { display:block; margin-bottom:.4rem; font-size:.8rem; text-transform:uppercase;
+  letter-spacing:.08em; color:#8a7f72; }
+nav.toc a { display:block; padding:.18rem 0; color:#44403c; text-decoration:none; }
+nav.toc a:hover, nav.toc a.current { color:var(--accent); }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.3rem 4rem; }
+h1,h2,h3 { line-height:1.25; color:#171412; }
+h1 { font-size:2rem; margin:0 0 1rem; }
+h2 { font-size:1.4rem; margin-top:2.2rem; border-bottom:1px solid var(--line);
+  padding-bottom:.25rem; }
+h3 { font-size:1.12rem; margin-top:1.6rem; }
+code, pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86em; }
+code { background:var(--panel); border:1px solid var(--line); border-radius:.25rem;
+  padding:.08em .35em; }
+pre { background:#171412; color:#f0ead9; padding:1rem 1.1rem; border-radius:.5rem;
+  overflow-x:auto; line-height:1.5; }
+pre code { background:none; border:none; color:inherit; padding:0; }
+blockquote { margin:1.4rem 0; padding:.7rem 1.1rem; background:var(--panel);
+  border-left:4px solid var(--accent); border-radius:0 .4rem .4rem 0; }
+blockquote p { margin:.4rem 0; }
+table { border-collapse:collapse; margin:1.2rem 0; font-size:.93rem; width:100%; }
+th,td { border:1px solid var(--line); padding:.45rem .7rem; text-align:left;
+  vertical-align:top; }
+th { background:var(--panel); }
+a { color:var(--accent); }
+hr { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+footer.site { max-width:46rem; margin:0 auto; padding:1rem 1.3rem 3rem;
+  color:#8a7f72; font-size:.85rem; font-family:system-ui,sans-serif; }
+footer.site a { color:var(--accent); }
+@media (max-width:60rem) { nav.toc { position:static; float:none; max-width:inherit; } }
+</style>
+</head>
+<body>
+<header class="site"><h1>Ask Your Files AI Guide</h1>
+<p>a manual by Dylan Asdale · Asdale Dynamics, LLC · fully local, fully yours</p></header>
+<nav class="toc"><b>Chapters</b><a href="index.html">Start Here</a><a href="01-why-pasting-fails.html">1 · Why Pasting Fails at Scale</a><a href="02-simple-retrieval.html">2 · Simple Retrieval: Search, Tagging, Outlines</a><a href="03-quote-file-rag.html">3 · Build a Tiny Quote-File RAG</a><a href="04-folder-packing.html">4 · The Folder-Packing Approach</a><a href="05-privacy-rules.html">5 · Privacy Rules for Personal Files</a><a href="06-when-to-doubt.html">6 · When Answers Deserve Doubt</a><a href="07-first-project.html" class="current">7 · Your First Project</a><a href="08-checklist.html">8 · The Session Checklist</a><a href="09-glossary.html">9 · Glossary</a></nav>
+<main>
+<article>
+<h1 id="chapter-7-your-first-project-from-empty-folder-to-first-answer">Chapter 7 — Your First Project: From Empty Folder to First Answer</h1>
+<p>Everything so far becomes one concrete project in this chapter. Budget: one evening, zero dollars, no cloud accounts. By the end you'll have a working local pipeline you built and ran yourself, and — the important part — your first real, sourced answer about your own files.</p>
+<h2 id="the-project">The project</h2>
+<blockquote><p><strong>"Question clinic": take one messy real folder, and make your next question about it answerable in under a minute — with a quote you can open and show.</strong></p></blockquote>
+<p>Pick a folder today: your insurance correspondence, your eBay returns threads, one section of notes from work. Real documents, moderate volume.</p>
+<h2 id="milestone-1-set-up-the-workspace-10-minutes">Milestone 1 — Set up the workspace (10 minutes)</h2>
+<pre><code class="language-bash">mkdir -p ~/qclinic/docs ~/qclinic/builds
+cp -r /path/to/your-real-folder/* ~/qclinic/docs/</code></pre>
+<p>Principles you're following (from Chapter 5): you copied, so originals stay untouched — this work happens on redactable copies. Everything lives under one <code>qclinic</code> folder — one place to back up, one place to delete.</p>
+<p><strong>Convert what needs converting.</strong> The quote-file tool reads <code>.txt</code> and <code>.md</code>. For PDFs, do a text export (print-to-<code>txt</code> in many readers, or any local desktop tool; scans with no text layer need OCR — try your OS's built-in tools first). Don't perfect this part; convert three to five core documents, move on.</p>
+<h2 id="milestone-2-make-the-pile-legible-before-any-ai-15-minutes">Milestone 2 — Make the pile legible before any AI (15 minutes)</h2>
+<ol><li>Write <code>~/qclinic/docs/INDEX.md</code> with one line per file (Chapter 2 format: date, filename, subject, tags).</li><li>Write <code>~/qclinic/docs/OUTLINE.md</code>: five bullets max, one per theme.</li></ol>
+<p>This is the step people want to skip. Do it anyway — it's 15 minutes, and it makes every later step sharper: the index is what <em>you</em> read when search is blurry; the outline is what the AI reads to know your pile's shape.</p>
+<h2 id="milestone-3-build-and-run-the-quote-file-10-minutes">Milestone 3 — Build and run the quote file (10 minutes)</h2>
+<p>Python is the only requirement:</p>
+<pre><code class="language-bash">cd ~/qclinic
+python3 /path/to/this-guide/tools/quote_rag.py build ./docs --store builds/quotes.json
+python3 /path/to/this-guide/tools/quote_rag.py ask builds/quotes.json &quot;your actual question&quot; --top 5</code></pre>
+<p>If you don't already have Ollama, the build marks the index as TF-IDF (Chapter 3) and it still works — same commands, offline scoring.</p>
+<p>While it runs, write down what surprises you. Most people are surprised twice: by the goods (an answer in 8 ms) and by the misses (the quote you <em>know</em> exists didn't score top). Misses teach the most. Nearly every miss is one of: wrong file format, a paragraph far too long, or your question's words don't appear in the document. Fix category three by re-asking with words the document itself uses — this retraining of <em>your</em> asking instinct is the real skill, worth more than any tool on its own.</p>
+<p>Optional, only when Ollama is on your machine:</p>
+<pre><code class="language-bash">ollama pull nomic-embed-text
+python3 tools/quote_rag.py build ./docs --store builds/quotes.json --embed nomic-embed-text</code></pre>
+<p>Same question again, and compare. Meaning-matching now helps when your words and the document's differ.</p>
+<h2 id="milestone-4-the-first-sourced-ai-answer-20-minutes">Milestone 4 — The first <em>sourced</em> AI answer (20 minutes)</h2>
+<p>Now the generation step — paste the passed quotes and <em>your</em> question into a chat window or a local model and ask directly:</p>
+<blockquote><p>"Here are 5 quotes I retrieved from my files, with their sources. My question: ⏎ Your question. Answer using only quotes you can see; say so for what's missing."</p></blockquote>
+<p>If you use a local model, the CLI does it:</p>
+<pre><code class="language-bash">python3 tools/quote_rag.py ask builds/quotes.json --answer &quot;your actual question&quot;</code></pre>
+<p><strong>Now the Chapter 6 reflex:</strong> pick one non-obvious claim in the answer, open the cited file, and read the sentence it came from. This is the moment it clicks — first <em>verified</em> answer, fully on your machine, files untouched, nothing left your computer. Take a breath. That was the whole loop.</p>
+<h2 id="milestone-5-name-what-you-built-5-minutes">Milestone 5 — Name what you built (5 minutes)</h2>
+<p>You now own a pipeline with five pieces. Naming them is what makes them transferable to the other folders in your life (the book draft, the eBay ledger, the budget):</p>
+<table><thead><tr><th>Piece</th><th>What it is</th><th>Your file</th></tr></thead><tbody><tr><td>docs</td><td>the copies that get read</td><td><code>~/qclinic/docs</code></td></tr><tr><td>INDEX</td><td>one-line records, tags</td><td><code>/INDEX.md</code></td></tr><tr><td>OUTLINE</td><td>map of themes</td><td><code>/OUTLINE.md</code></td></tr><tr><td>builds</td><td>re-runnable indexes</td><td><code>/builds/quotes.json</code></td></tr><tr><td>the loop</td><td>search → quotes → answer → <em>verify</em></td><td>later a habit, not a file</td></tr></tbody></table>
+<p>Add your <em>next</em> folder on the list the same night (just the name; setup when you get to it). Momentum comes from naming the next one now, at the exact moment it's fresh.</p>
+<h2 id="if-something-didnt-work">If something didn't work</h2>
+<ul><li><strong>"Indexed 0 quotes."</strong> No <code>.txt</code>/<code>.md</code> files in the folder — see the conversion step in Milestone 1.</li><li><strong>Scores all look mushy (~0.2 everywhere).</strong> Your question probably uses words from your vocabulary, not the documents'. Re-ask with a document word ("explanation of benefits," the specific form name — actual letters).</li><li><strong>The answer asserts with no quotes.</strong> You're in <code>--answer</code> mode without local model agreement, or the top quotes really came from something-else-but-plausible. Scroll up: the quote list is always displayed before the summary — trust the list, not the prose.</li><li><strong>Everything works but feels slow.</strong> You don't need speed. The point is that it <em>runs</em> — even 10× "slower" beats pasting the whole library every session (Chapter 1's counting problem).</li></ul>
+<p>Keep going with <a href="08-checklist.html">Chapter 8</a>: the one-page checklist you can print and tape to your desk, so the first project becomes the everyday way.</p>
+</article>
+</main>
+<footer class="site">
+<p>Ask Your Files AI Guide · Copyright (c) 2026 Asdale Dynamics, LLC · MIT licensed ·
+built locally from Markdown, no network needed</p>
+</footer>
+</body>
+</html>
